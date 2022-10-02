@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block con %}
+
+    
+<h1><b>{{tset.subject}}</b></h1>
+
+
+<div class="row mt-4">
+    <div class="col-sm-8">
+        <textarea class="form-control" disabled style="height: 200px;">{{ tset.content }}</textarea>
+    </div>
+    <div class="col-sm-4">
+        <img src="{{ tset.maker.getpic }}" width="500px">
+        <div class="text-center mt-3"><b>{{ tset.maker }} </b></div>
+    </div>
+</div>
+
+{% if user in t.voter.all %}
+    <div class="row mt-4">
+        <div class="col-sm-4">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 75%" aria-valuenow="{{ cho }}" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <textarea class="form-control mt-3" style="height: 100px">{{ i.comment }}</textarea>
+        </div>
+    </div>
+
+    <div class="mt-4 text-end">
+        <a href="{% url 'vote:cancel' t.id %}"></a><button class="btn btn-danger">무르기</button>
+    </div>
+
+{% else %}
+
+<form method="post" action="{% url 'vote:vote' tset.id %}">
+    {% csrf_token %}
+    <div class="row mt-4">
+        <div class="col-sm-4">
+            <input type="radio" name="cho" value="{{ i.id }}" {% if forloop.first %}checked{% endif %}><b>{{ i.name }}</b>
+            <textarea class="form-control mt-3" style="height: 100px">{{ i.comment }}</textarea>
+        </div>
+    </div>
+
+    <div class="mt-4 text-end">
+        <button class="btn btn-dark">투표</button>
+    </div>
+</form>
+{% endif %}
+
+
+{% endblock %}
+
+

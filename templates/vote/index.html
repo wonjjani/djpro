@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block con %}
+    
+<h1><b>VOTE</b></h1>
+
+<div class="text-end">
+    <a href="{% url 'vote:create' %}" class="btn btn-dark">토픽생성</a>
+</div>
+
+<ul>
+{% for i in tset %}
+    <li><a href="{% url 'vote:detail' i.id %}">{{i.subject}}</a></li>
+{% endfor %}
+</ul>
+
+
+{% endblock %}

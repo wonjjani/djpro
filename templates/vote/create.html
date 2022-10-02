@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block con %} 
+    <h1><b>토픽생성</b></h1>
+    <div class="mt-4">
+        <form method="post">
+            {% csrf_token %}
+            <input name="sub" type="text" class="form-control" placeholder="INPUT SUBJECT">
+            <textarea name="con" class="form-control" placeholder="ONPUT CONTENT" style="height: 150px;"></textarea>
+
+            <div class="text-center mt-4">
+                <button type="button" class="btn btn-dark " onclick="makecho()" style="width: 40%;">보기생성</button>
+                <button class="btn btn-primary" style="width: 40%;">토픽생성</button>
+            </div>
+
+            <div class=row mt-5>
+                <div id="here">
+                    <input name="bogi" type="text" class="form-control" placholder="INPUT BOGI NAME">
+                    <textarea name="com" class="form-contril" placeholder="INPUT COMMENT" style="height:100px;"></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>function makecho(){
+        d = document.getElementById("here");
+        n = document.createElement("div");
+        n.setAttribute("class", "col-sm-4");
+        n.innerHTML = '<input type="text" name="bogi" class="form-control" placholder="INPUT BOGI NAME">\
+        <textarea class="form-contril" name="com" placeholder="INPUT COMMENT" style="height:100px;"></textarea>\
+      '
+      d.appendChild(n);
+    }
+        
+    
+        </script>
+
+
+
+
+{% endblock %}
